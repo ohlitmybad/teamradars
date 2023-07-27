@@ -201,6 +201,24 @@ body.dark-mode .dark-mode-toggle .toggle-icon::before {
 	
 </head>
 
+<script>
+    // Function to scroll down a tiny bit
+    function scrollDown() {
+        window.scrollBy(0, 250); // Adjust the value (100) to change the scroll distance
+    }
+
+    // Function to scroll up a tiny bit
+    function scrollUp() {
+        window.scrollBy(0, -240); // Adjust the value (-80) to change the scroll distance
+    }
+
+    // Combine both actions with a small timer between them
+    window.onload = function() {
+        scrollDown();
+        setTimeout(scrollUp, 1); // Adjust the delay time (1000ms = 1 second)
+    };
+</script>
+	
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSBMXX80EF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
