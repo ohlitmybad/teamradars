@@ -40,5 +40,13 @@
   },
   "promo": {
     "plot-link": "Plot Team Metrics"
+  },
+  "positions": {
+    "goalkeeper": "Goalkeeper",
+    "centreback": "Centre-back",
+    "fullback": "Full-back",
+    "midfielder": "Midfielder",
+    "winger": "Winger",
+    "striker": "Striker"
   }
 } 
