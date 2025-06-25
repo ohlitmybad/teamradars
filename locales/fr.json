@@ -40,5 +40,13 @@
   },
   "promo": {
     "plot-link": "Nuages de points"
+  },
+  "positions": {
+    "goalkeeper": "Gardien",
+    "centreback": "Défenseur",
+    "fullback": "Latéral",
+    "midfielder": "Milieu",
+    "winger": "Ailier",
+    "striker": "Buteur"
   }
 } 
