@@ -43,13 +43,31 @@ body {
   transition: background-color 0.3s, color 0.3s;
   margin: 0;
   padding: 0;
-  min-width: 770px;
-  overflow-x: auto;
 }
 body.dark-mode {
   background-color: #0e0f0f !important;
-  min-width: 770px;
 }
+@media (max-width: 770px) {
+  body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  }
+  #full-page {
+   width: var(--dynamic-width);
+    transform: scale(var(--dynamic-scale));
+    transform-origin: top left;
+    min-width: 770px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  overflow: hidden; /* Add this line */
+  
+  }
+    }
 .container {
   max-width: 880px;
   min-width: 770px;
