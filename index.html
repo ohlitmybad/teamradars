@@ -8,8 +8,8 @@
   <link rel="alternate" hreflang="fr" href="https://datamb.football/teamradars/?lang=fr" />
   <link rel="alternate" hreflang="es" href="https://datamb.football/teamradars/?lang=es" />
   <link rel="alternate" hreflang="tr" href="https://datamb.football/teamradars/?lang=tr" />
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-<link rel="shortcut icon" type="image/x-icon" href="https://datamb.football/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://datamb.football/favicon.ico">
   <title data-i18n="meta.title">DataMB | Compare Teams</title>
   <meta name="description" data-i18n="meta.description" content="Compare the statistics of teams in the Top 7 Leagues. Visualize team performance. Use our radar tool and plot tools to compare Goals, Goals conceded, xG, Shots on target, Pressing, Defensive duels, Pass completion and more for teams in Premier League, La Liga, Bundesliga, Serie A, Ligue 1, Eredivisie, Primeira Liga.">
   <meta property="og:image" content="https://datamb.football/vignettes/teamradars.png">
@@ -22,27 +22,19 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-
 <script>
-  (function() {
-      // Check if device is Android
-      var isAndroid = /Android/i.test(navigator.userAgent);
-      
-      if (isAndroid) {
-          var width = window.innerWidth;
-          var viewportMeta = document.querySelector('meta[name="viewport"]');
-          if (viewportMeta) {
-              if (width < 770) {
-                  var initialScale = width / 770;
-                  viewportMeta.setAttribute('content', 'width=device-width, initial-scale=' + initialScale + ', user-scalable=no');
-              } else {
-                  var fixedScale = 1;
-                  viewportMeta.setAttribute('content', 'width=device-width, initial-scale=' + fixedScale + ', user-scalable=no');
-              }
-          }
-      }
-  })();
-</script>
+  const width = window.innerWidth;
+  
+  if (width <= 770) {
+    const scale = width / 770;
+    const widthPercent = 100 / scale;
+  
+    document.documentElement.style.setProperty('--dynamic-width', widthPercent + '%');
+    document.documentElement.style.setProperty('--dynamic-scale', scale);
+  }
+  </script>
+  
+
 
 	
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -51,33 +43,7 @@
 
 
 
-<header class="header">
-  <div class="logo">
-    <a href="https://datamb.football">
-      <img src="https://datamb.football/logo.png" alt="Football team statistics comparison. Radar comparison tool. Visualise and compare team data from the top 7 leagues : Premier League, La Liga, Bundesliga, Serie A, Ligue 1, Eredivisie, Primeira Liga" /></a>
-      <div class="logo-text"><a href="https://datamb.football">&nbsp;Teams</a></div>
-  </div>
-  <nav class="navigation">
-    <a href="https://datamb.football/" class="button10" data-i18n="header.home">Home</a>
-    <a href="https://datamb.football/join" class="button10" data-i18n="header.pro">Pro</a>
-    <a href="https://datamb.football/guide" class="button10" data-i18n="header.guide">Guide</a>
-  </nav>
-  <div class="header-right">
-  <div class="search-container1">
-    <button id="searchButtonmodal"><iconify-icon icon="ion:search-outline"></iconify-icon></button>
-</div>
-  <div class="language-switcher-container">
-    <button class="language-button" id="languageButton">
-      <iconify-icon icon="heroicons:globe-alt"></iconify-icon>
-    </button>
-        <div class="language-dropdown" id="languageDropdown">
-      <a href="?lang=en" class="language-option"><iconify-icon icon="flag:gb-4x3"></iconify-icon>English</a>
-      <a href="?lang=fr" class="language-option"><iconify-icon icon="flag:fr-4x3"></iconify-icon>Français</a>
-      <a href="?lang=es" class="language-option"><iconify-icon icon="flag:es-4x3"></iconify-icon>Español</a>
-      <a href="?lang=tr" class="language-option"><iconify-icon icon="flag:tr-4x3"></iconify-icon>Türkçe</a>
-    </div>
-  </div></div>
-</header>
+
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7677714701428206"
      crossorigin="anonymous"></script>
@@ -109,7 +75,38 @@
 
 
 <body>
-	  <br>
+  <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+    <div class="toggle-icon"></div>
+  </div>
+  <div id="full-page">
+  <header class="header">
+    <div class="logo">
+      <a href="https://datamb.football">
+        <img src="https://datamb.football/logo.png" alt="Football team statistics comparison. Radar comparison tool. Visualise and compare team data from the top 7 leagues : Premier League, La Liga, Bundesliga, Serie A, Ligue 1, Eredivisie, Primeira Liga" /></a>
+        <div class="logo-text"><a href="https://datamb.football">&nbsp;Teams</a></div>
+    </div>
+    <nav class="navigation">
+      <a href="https://datamb.football/" class="button10" data-i18n="header.home">Home</a>
+      <a href="https://datamb.football/join" class="button10" data-i18n="header.pro">Pro</a>
+      <a href="https://datamb.football/guide" class="button10" data-i18n="header.guide">Guide</a>
+    </nav>
+    <div class="header-right">
+    <div class="search-container1">
+      <button id="searchButtonmodal"><iconify-icon icon="ion:search-outline"></iconify-icon></button>
+  </div>
+    <div class="language-switcher-container">
+      <button class="language-button" id="languageButton">
+        <iconify-icon icon="heroicons:globe-alt"></iconify-icon>
+      </button>
+          <div class="language-dropdown" id="languageDropdown">
+        <a href="?lang=en" class="language-option"><iconify-icon icon="flag:gb-4x3"></iconify-icon>English</a>
+        <a href="?lang=fr" class="language-option"><iconify-icon icon="flag:fr-4x3"></iconify-icon>Français</a>
+        <a href="?lang=es" class="language-option"><iconify-icon icon="flag:es-4x3"></iconify-icon>Español</a>
+        <a href="?lang=tr" class="language-option"><iconify-icon icon="flag:tr-4x3"></iconify-icon>Türkçe</a>
+      </div>
+    </div></div>
+  </header>
+  <br>
   <center>
 <!-- radarplotsearch -->
 <ins class="adsbygoogle"
@@ -242,9 +239,7 @@
   </div>
       </div>
   
-  <div class="dark-mode-toggle" onclick="toggleDarkMode()">
-    <div class="toggle-icon"></div>
-  </div>
+
 
 <script src="/teamradars.js"></script>
 	  
@@ -289,6 +284,6 @@
     </nav>
   </div>
 </footer>
-
+</div>
 </body>
 </html>
